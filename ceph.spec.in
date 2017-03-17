@@ -288,6 +288,7 @@ Requires:	ceph-base = %{epoch}:%{version}-%{release}
 # For ceph-rest-api
 %if 0%{?fedora} || 0%{?rhel}
 Requires:      python-flask
+Requires:      python2-flask-restful
 %endif
 %if 0%{?suse_version}
 Requires:      python-Flask
@@ -305,6 +306,9 @@ License:        LGPL-2.1 and CC-BY-SA-1.0 and GPL-2.0 and BSL-1.0 and GPL-2.0-wi
 Group:          System/Filesystems
 %endif
 Requires:       ceph-base = %{epoch}:%{version}-%{release}
+%if 0%{?fedora} || 0%{?rhel}
+Requires:      python2-flask-restful
+%endif
 
 %description mgr
 ceph-mgr enables python modules that provide services (such as the REST
