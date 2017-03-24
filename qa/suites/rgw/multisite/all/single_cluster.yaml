@@ -1,0 +1,44 @@
+meta:
+- desc: run a ceph cluster 
+roles:
+- - cluster1.mon.a
+  - cluster1.osd.0
+  - cluster1.osd.2
+- - cluster1.mon.c
+  - cluster1.mon.b
+  - cluster1.osd.1
+  - cluster1.client.0
+tasks:
+- install:
+- ceph:
+    cluster: cluster1
+    conf:
+      client.0:
+        rgw region: jerry
+        rgw zone: seinfeld
+        rgw region root pool: .rgw.region.0
+        rgw zone root pool: .rgw.zone.0
+        rgw gc pool: .rgw.gc.0
+        rgw user uid pool: .users.uid.0
+        rgw user keys pool: .users.0
+        rgw log data: True
+        rgw log meta: True
+        rgw lc debug interval: 10
+        rgw gc obj min wait: 15
+- rgw: 
+    realm:
+      apartment
+    regions:
+      jerry:
+        api name: api1
+        is master: True
+        master zone: seinfeld
+        zones: [seinfeld]
+    cluster1.client.0:
+      valgrind: [--tool=memcheck]
+      system user:
+        name: client0-system-user
+        access key: 1te6NH5mcdcq0Tc5i8i2
+        secret key: 1y4IOauQoL18Gp2zM7lC1vLmoawgqcYPbYGcWfXv
+- sleep:
+    duration: 10
