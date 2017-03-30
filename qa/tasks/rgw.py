@@ -244,7 +244,7 @@ def start_rgw(ctx, config, on_client = None, except_client = None):
     """
     Start rgw on remote sites.
     """
-    log.info('Starting rgw...')
+    log.info('ALI ADDED Starting rgw...')
     log.debug('client %r', on_client)
     clients_to_run = [on_client]
     if on_client is None:
